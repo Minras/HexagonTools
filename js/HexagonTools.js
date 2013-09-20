@@ -84,11 +84,8 @@ HT.Hexagon = function(id, x, y)
  */
 HT.Hexagon.prototype.draw = function(ctx)
 {
-    if(!this.selected) {
-        ctx.strokeStyle = "grey";
-    } else {
-        ctx.strokeStyle = "black";
-    }
+    ctx.strokeStyle = !this.selected ? "grey" : "black";
+
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(this.Points[0].X, this.Points[0].Y);
@@ -97,6 +94,8 @@ HT.Hexagon.prototype.draw = function(ctx)
         ctx.lineTo(p.X, p.Y);
     }
     ctx.closePath();
+    ctx.fillStyle = "#ccc";
+    ctx.fill();
     ctx.stroke();
 
     if(this.Id) {
