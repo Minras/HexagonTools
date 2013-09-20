@@ -78,26 +78,8 @@ HT.Hexagon = function(id, x, y)
     this.selected = false;
 };
 
-/**
- * draws this Hexagon to the canvas
- * @this {HT.Hexagon}
- */
-HT.Hexagon.prototype.draw = function(ctx)
+HT.Hexagon.prototype.drawDebugText = function(ctx)
 {
-    ctx.strokeStyle = !this.selected ? "grey" : "black";
-
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(this.Points[0].X, this.Points[0].Y);
-    for(var i = 1; i < this.Points.length; i++) {
-        var p = this.Points[i];
-        ctx.lineTo(p.X, p.Y);
-    }
-    ctx.closePath();
-    ctx.fillStyle = "#ccc";
-    ctx.fill();
-    ctx.stroke();
-
     if(this.Id) {
         //draw text for debugging
         ctx.fillStyle = "black"
@@ -139,6 +121,31 @@ HT.Hexagon.prototype.draw = function(ctx)
         ctx.fillText("y", this.P1.X + 2, this.y + this.y1/2);
         ctx.fillText("z = " + HT.Hexagon.Static.SIDE, this.P1.X, this.P1.Y + this.y1 + 10);
         ctx.fillText("(" + this.x1.toFixed(2) + "," + this.y1.toFixed(2) + ")", this.P1.X, this.P1.Y + 10);
+    }
+}
+
+/**
+ * draws this Hexagon to the canvas
+ * @this {HT.Hexagon}
+ */
+HT.Hexagon.prototype.draw = function(ctx)
+{
+    ctx.strokeStyle = !this.selected ? "grey" : "black";
+
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(this.Points[0].X, this.Points[0].Y);
+    for(var i = 1; i < this.Points.length; i++) {
+        var p = this.Points[i];
+        ctx.lineTo(p.X, p.Y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = "#ccc";
+    ctx.fill();
+    ctx.stroke();
+
+    if (HT.Hexagon.Config.DEBUG) {
+        this.drawDebugText(ctx);
     }
 };
 
@@ -215,3 +222,8 @@ HT.Hexagon.Static = {
     ORIENTATION:HT.Hexagon.Orientation.Normal,
     DRAWSTATS: false
 };//hexagons will have 25 unit sides for now
+
+// Have to be initialized by the client
+HT.Hexagon.Config = {
+    DEBUG: false
+};
