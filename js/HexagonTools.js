@@ -125,7 +125,7 @@ HT.Hexagon.prototype.drawDebugText = function(ctx)
 }
 
 /**
- * draws this Hexagon to the canvas
+ * Draws this Hexagon to the canvas
  * @this {HT.Hexagon}
  */
 HT.Hexagon.prototype.draw = function(ctx)
@@ -144,7 +144,7 @@ HT.Hexagon.prototype.draw = function(ctx)
     ctx.fill();
     ctx.stroke();
 
-    if (HT.Hexagon.Config.DEBUG) {
+    if (HT.Hexagon.Static.DEBUG) {
         this.drawDebugText(ctx);
     }
 };
@@ -158,7 +158,6 @@ HT.Hexagon.prototype.isInBounds = function(x, y)
 {
     return this.Contains(new HT.Point(x, y));
 };
-
 
 /**
  * Returns true if the point is inside this hexagon, it is a quick contains
@@ -175,12 +174,12 @@ HT.Hexagon.prototype.isInHexBounds = function(/*Point*/ p)
     return false;
 };
 
-//grabbed from:
-//http://www.developingfor.net/c-20/testing-to-see-if-a-point-is-within-a-polygon.html
-//and
-//http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html#The%20C%20Code
 /**
- * Returns true if the point is inside this hexagon, it first uses the quick isInHexBounds contains, then check the boundaries
+ * Returns true if the point is inside this hexagon, it first uses the quick isInHexBounds contains,
+ * then check the boundaries.
+ * Grabbed from: http://www.developingfor.net/c-20/testing-to-see-if-a-point-is-within-a-polygon.html
+ * and
+ * http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html#The%20C%20Code
  * @this {HT.Hexagon}
  * @param {HT.Point} p the test point
  * @return {boolean}
@@ -205,12 +204,12 @@ HT.Hexagon.prototype.Contains = function(/*Point*/ p)
             }
         }
     }
+
     return isIn;
 };
 
 
-HT.Hexagon.Orientation =
-{
+HT.Hexagon.Orientation = {
     Normal: 0,
     Rotated: 1
 };
@@ -220,10 +219,6 @@ HT.Hexagon.Static = {
     WIDTH:91.14378277661477,
     SIDE:50.0,
     ORIENTATION:HT.Hexagon.Orientation.Normal,
-    DRAWSTATS: false
-};//hexagons will have 25 unit sides for now
-
-// Have to be initialized by the client
-HT.Hexagon.Config = {
+    DRAWSTATS: false,
     DEBUG: false
-};
+}; //hexagons will have 25 unit sides for now
