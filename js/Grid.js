@@ -93,18 +93,18 @@ HT.Grid.prototype.GetHexId = function(row, col) {
 /**
  * Returns a hex at a given point
  * @this {HT.Grid}
- * @param {string} p Coordinate point object
+ * @param {HT.Point} p Coordinate point object
  * @return {HT.Hexagon}
  */
 HT.Grid.prototype.GetHexAt = function(/*Point*/ p) {
-	//find the hex that contains this point
-	for (var h in this.Hexes) {
-            if (this.Hexes[h].Contains(p)) {
-                return this.Hexes[h];
-            }
-	}
+    //find the hex that contains this point
+    for (var h in this.Hexes) {
+        if (this.Hexes[h].Contains(p)) {
+            return this.Hexes[h];
+        }
+    }
 
-	return null;
+    return null;
 };
 
 /**
@@ -129,7 +129,7 @@ HT.Grid.prototype.GetHexDistance = function(/*Hexagon*/ h1, /*Hexagon*/ h2)
 HT.Grid.prototype.GetHexById = function(id) {
     for(var i in this.Hexes) {
         if(this.Hexes[i].Id == id) {
-                return this.Hexes[i];
+            return this.Hexes[i];
         }
     }
 
